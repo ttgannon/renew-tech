@@ -1,14 +1,14 @@
-import { useState, useEffect, useMemo } from 'react';
-import ProductCard from './components/ProductCard';
-import CartPanel from './components/CartPanel';
-import { CATEGORIES, CATEGORY_ICONS, PRODUCTS_URL } from './utils/helpers';
-import './App.css';
+import { useState, useEffect, useMemo } from "react";
+import ProductCard from "./components/ProductCard";
+import CartPanel from "./components/CartPanel";
+import { CATEGORIES, CATEGORY_ICONS, PRODUCTS_URL } from "./utils/helpers";
+import "./App.css";
 
 export default function App() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [category, setCategory] = useState('All');
+  const [category, setCategory] = useState("All");
   const [cart, setCart] = useState([]); // [{ id, qty }]
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -29,13 +29,18 @@ export default function App() {
   }, []);
 
   const filtered = useMemo(
-    () => (category === 'All' ? products : products.filter((p) => p.group === category)),
-    [products, category]
+    () =>
+      category === "All"
+        ? products
+        : products.filter((p) => p.group === category),
+    [products, category],
   );
 
   const cartQtyMap = useMemo(() => {
     const m = {};
-    cart.forEach(({ id, qty }) => { m[id] = qty; });
+    cart.forEach(({ id, qty }) => {
+      m[id] = qty;
+    });
     return m;
   }, [cart]);
 
@@ -45,7 +50,9 @@ export default function App() {
     setCart((prev) => {
       const existing = prev.find((e) => e.id === product.id);
       if (existing) {
-        return prev.map((e) => (e.id === product.id ? { ...e, qty: e.qty + 1 } : e));
+        return prev.map((e) =>
+          e.id === product.id ? { ...e, qty: e.qty + 1 } : e,
+        );
       }
       return [...prev, { id: product.id, qty: 1 }];
     });
@@ -89,10 +96,14 @@ export default function App() {
           {CATEGORIES.map((cat) => (
             <button
               key={cat}
-              className={`filter-chip${category === cat ? ' active' : ''}`}
+              className={`filter-chip${category === cat ? " active" : ""}`}
               onClick={() => setCategory(cat)}
             >
-              {cat === 'All' ? 'All Products' : `${CATEGORY_ICONS[cat]} ${cat}s`}
+              {cat === "All"
+                ? "All Products"
+                : cat === "Accessory"
+                  ? "Accessories"
+                  : `${CATEGORY_ICONS[cat]} ${cat}s`}
             </button>
           ))}
         </div>
@@ -111,8 +122,15 @@ export default function App() {
         {!loading && !error && (
           <>
             <h2 className="section-heading">
-              {category === 'All' ? 'All Products' : `${category}s`}
-              <span style={{ fontWeight: 400, color: 'var(--muted)', fontSize: '16px', marginLeft: '10px' }}>
+              {category === "All" ? "All Products" : `${category}s`}
+              <span
+                style={{
+                  fontWeight: 400,
+                  color: "var(--muted)",
+                  fontSize: "16px",
+                  marginLeft: "10px",
+                }}
+              >
                 ({filtered.length} items)
               </span>
             </h2>
