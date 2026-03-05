@@ -77,7 +77,7 @@ export default function App() {
           <div className="logo">
             <div className="logo-icon">♻️</div>
             <div>
-              <div className="logo-name">ReNew Tech</div>
+              <div className="logo-name">ReFURbished Tech</div>
               <div className="logo-sub">Refurbished Computers</div>
             </div>
           </div>

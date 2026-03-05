@@ -1,4 +1,4 @@
-# ReNew Tech
+# ReFURbished Tech
 
 A modern, responsive storefront for refurbished computers and accessories. Built with React and Vite, it fetches live product data and lets users browse, filter by category, and manage a shopping cart — all client-side, no backend required.
 
